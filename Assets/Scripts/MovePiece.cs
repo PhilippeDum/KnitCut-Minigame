@@ -1,13 +1,18 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MovePiece : MonoBehaviour
 {
+    // verification if the switch happen
+    public bool switchOn = false;
+    
+
     [Header("Pieces")]
     [SerializeField] private Transform firstPieceToReplace;
     [SerializeField] private Transform secondPieceToReplace;
 
     Color defaultColorMat = Color.white;
-
+    
     void Update()
     {
         DetectClick();
@@ -79,6 +84,10 @@ public class MovePiece : MonoBehaviour
         // Switch positions
         firstPieceToReplace.position = secondPos;
         secondPieceToReplace.position = firstPos;
+
+
+        // switch on
+        switchOn = true;
 
         // Reset pieces
         ModifyPiece(firstPieceToReplace, defaultColorMat, new Vector3(1, 1, 1));

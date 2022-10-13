@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pieces_deplacable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Tuyau
   - Water
   - UI
   - 
