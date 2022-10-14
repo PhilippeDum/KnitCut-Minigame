@@ -4,8 +4,7 @@ using UnityEngine;
 using PDollarGestureRecognizer;
 using System;
 using System.IO;
-using UnityEditor.VersionControl;
-using UnityEngine.UIElements;
+using UnityEditor.U2D;
 
 public class Recognizer : MonoBehaviour
 {
@@ -28,6 +27,8 @@ public class Recognizer : MonoBehaviour
 
     [SerializeField] private float scoreMin = 0.7f;
 
+    [SerializeField] private LineRenderer shapeDrawingLineRenderer;
+
     //GUI
     private string message;
     private bool recognized;
@@ -49,31 +50,15 @@ public class Recognizer : MonoBehaviour
         //Load user custom gestures
         string[] filePaths = Directory.GetFiles(Application.dataPath + "/Resources/Recognizer/", "*.xml");
         foreach (string filePath in filePaths)
+        {
             trainingSet.Add(GestureIO.ReadGestureFromFile(filePath));
+            Debug.Log($"{GestureIO.ReadGestureFromFile(filePath).Name} loaded");
+        }
     }
 
     void Update()
     {
         Draw();
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            if (recognized) strokeId = -1;
-
-            ++strokeId;
-
-            List<Point> spritePoints = new List<Point>();
-
-            for (int i = 0; i < sprite.vertices.Length; i++)
-            {
-                Debug.Log(sprite.vertices[i]);
-                newGestureName = sprite.name;
-
-                spritePoints.Add(new Point(sprite.vertices[i].x, -sprite.vertices[i].y, strokeId));
-            }
-
-            CreateShapeModelFile(spritePoints);
-        }
     }
 
     private void Draw()
@@ -142,7 +127,7 @@ public class Recognizer : MonoBehaviour
             }
             else
             {
-                message = "not recognized";
+                message = "Retry !";
             }
         }
 
@@ -153,6 +138,48 @@ public class Recognizer : MonoBehaviour
         if (GUI.Button(new Rect(Screen.width - 50, 150, 50, 30), "Add") && points.Count > 0 && newGestureName != "")
         {
             CreateShapeModelFile(points);
+        }
+
+        // Add sprite
+        if (GUI.Button(new Rect(Screen.width - 150, 90, 150, 30), "Add sprite model"))
+        {
+            if (recognized) strokeId = -1;
+
+            ++strokeId;
+
+            List<Point> spritePoints = new List<Point>();
+
+            // PROBLEM HERE WITH INFORMATIONS SAVED (UV)
+
+            for (int i = 0; i < sprite.uv.Length; i++)
+            {
+                Debug.Log(sprite.uv[i]);
+                newGestureName = sprite.name;
+
+                spritePoints.Add(new Point(sprite.uv[i].x, -sprite.uv[i].y, strokeId));
+            }
+
+            CreateShapeModelFile(spritePoints);
+        }
+
+        // Charge Model
+        if (GUI.Button(new Rect(Screen.width - 150, 200, 150, 30), "Charge model"))
+        {
+            for (int i = 0; i < trainingSet.Count; i++)
+            {
+                if (trainingSet[i].Name == sprite.name)
+                {
+                    Debug.Log($"set : {trainingSet[i].Name}");
+                    shapeDrawingLineRenderer.positionCount = trainingSet[i].Points.Length;
+                    for (int p = 0; p < trainingSet[i].Points.Length; p++)
+                    {
+                        Vector3 position = new Vector3(trainingSet[i].Points[p].X, trainingSet[i].Points[p].Y);
+                        Debug.Log($"-> position '{p}' : {position}");
+                        shapeDrawingLineRenderer.SetPosition(p, position);
+                    }
+                    return;
+                }
+            }
         }
     }
 
@@ -165,6 +192,8 @@ public class Recognizer : MonoBehaviour
 #endif
 
         trainingSet.Add(new Gesture(pointsList.ToArray(), newGestureName));
+        
+        Debug.Log($"New model created : {newGestureName}");
 
         newGestureName = "";
     }
