@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 
 using UnityEngine;
+using System.Globalization;
 
 namespace PDollarGestureRecognizer
 {
@@ -79,16 +80,24 @@ namespace PDollarGestureRecognizer
                             currentStrokeIndex++;
                             break;
                         case "Point":
+                            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+                            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+
+                            float pointX = float.Parse(xmlReader["X"], NumberStyles.Any, ci);
+                            float pointY = float.Parse(xmlReader["Y"], NumberStyles.Any, ci);
+
                             points.Add(new Point(
-                                float.Parse(xmlReader["X"]),
-                                float.Parse(xmlReader["Y"]),
+                                pointX,
+                                pointY,
+                                /*float.Parse(xmlReader["X"]),
+                                float.Parse(xmlReader["Y"]),*/
                                 currentStrokeIndex
                             ));
                             break;
                     }
                 }
             }
-            finally
+            finally 
             {
                 if (xmlReader != null)
                     xmlReader.Close();

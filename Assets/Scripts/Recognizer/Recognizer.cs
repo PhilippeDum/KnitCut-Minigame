@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PDollarGestureRecognizer;
 using System;
 using System.IO;
-using UnityEditor.U2D;
 
 public class Recognizer : MonoBehaviour
 {
@@ -16,9 +14,10 @@ public class Recognizer : MonoBehaviour
     private int strokeId = -1;
 
     private Vector3 virtualKeyPosition = Vector2.zero;
-    private Rect drawingArea;
+    [SerializeField] private Rect drawingArea;
 
     private int vertexCount = 0;
+    [SerializeField] private int vertexLimit = 500;
 
     private List<LineRenderer> gestureLinesRenderer = new List<LineRenderer>();
     private LineRenderer currentGestureLineRenderer;
@@ -29,6 +28,8 @@ public class Recognizer : MonoBehaviour
 
     [SerializeField] private LineRenderer shapeDrawingLineRenderer;
 
+    [SerializeField] private Transform drawingUI; 
+
     //GUI
     private string message;
     private bool recognized;
@@ -36,8 +37,19 @@ public class Recognizer : MonoBehaviour
 
     void Start()
     {
-        drawingArea = new Rect(0, 0, Screen.width - Screen.width / 3, Screen.height);
+        CreateDrawingArea();
+
         LoadGestures();
+    }
+
+    private void CreateDrawingArea()
+    {
+        //drawingArea = new Rect(0, 0, Screen.width - Screen.width / 3, Screen.height);
+
+        RectTransform drawRT = drawingUI.GetComponent<RectTransform>();
+        drawingArea = drawRT.rect;
+        Debug.Log($"{drawRT.position}");
+        Debug.Log($"{drawRT.anchoredPosition}");
     }
 
     private void LoadGestures()
@@ -49,11 +61,13 @@ public class Recognizer : MonoBehaviour
 
         //Load user custom gestures
         string[] filePaths = Directory.GetFiles(Application.dataPath + "/Resources/Recognizer/", "*.xml");
-        foreach (string filePath in filePaths)
-        {
-            trainingSet.Add(GestureIO.ReadGestureFromFile(filePath));
-            Debug.Log($"{GestureIO.ReadGestureFromFile(filePath).Name} loaded");
-        }
+
+        // Choose one random model from list
+        int randomFilePathIndex = UnityEngine.Random.Range(0, filePaths.Length);
+        string randomFilePath = filePaths[randomFilePathIndex];
+        Debug.Log($"Random path : {GestureIO.ReadGestureFromFile(randomFilePath).Name}");
+
+        trainingSet.Add(GestureIO.ReadGestureFromFile(randomFilePath));
     }
 
     void Update()
@@ -63,11 +77,13 @@ public class Recognizer : MonoBehaviour
 
     private void Draw()
     {
+        // Get position of mouse button click
         if (Input.GetMouseButton(0))
         {
             virtualKeyPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
         }
 
+        // Check if position is in drawing area range
         if (drawingArea.Contains(virtualKeyPosition))
         {
             if (Input.GetMouseButtonDown(0))
@@ -97,7 +113,7 @@ public class Recognizer : MonoBehaviour
                 vertexCount = 0;
             }
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && vertexCount < vertexLimit)
             {
                 points.Add(new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId));
 
