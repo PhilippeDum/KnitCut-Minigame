@@ -56,6 +56,8 @@
     <Compile Include="Assets\ProgressionLevelWaterGame.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\Geometry.cs" />
     <Compile Include="Assets\PathSynchronisation.cs" />
+    <Compile Include="Assets\Scripts\ThomasScriptTest\ManualBaking.cs" />
+    <Compile Include="Assets\Scripts\ThomasScriptTest\BlockPiece.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\Demo.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\Result.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\Point.cs" />
     <Compile Include="Assets\Scripts\MovePiece.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\Gesture.cs" />
+    <Compile Include="Assets\Scripts\Recognizer\DrawOverUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\10-stylus-medium-exclamation_point-01.xml" />
