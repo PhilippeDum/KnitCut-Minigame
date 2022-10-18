@@ -11,7 +11,7 @@ namespace Minigame_Drawing_Recognier
     {
         [Header("Draw Parameters")]
         [SerializeField] private Transform gestureOnScreenPrefab;
-        [SerializeField] private float scoreMin = 0.7f;
+        [SerializeField] private float scoreMin = 0.9f;
 
         private List<Gesture> trainingSet = new List<Gesture>();
         private List<Point> points = new List<Point>();
@@ -23,6 +23,13 @@ namespace Minigame_Drawing_Recognier
 
         private int strokeId = -1;
         private int vertexCount = 0;
+
+        [Header("Price Modifier")]
+        [SerializeField] private float basePrice;
+        [SerializeField] private float bonus;
+        [SerializeField] private float finalPrice;
+        [SerializeField] private Text priceText;
+        [SerializeField] private GameObject pricePanel;
 
         [Header("UI")]
         [SerializeField] private Transform drawingArea;
@@ -42,6 +49,8 @@ namespace Minigame_Drawing_Recognier
             LoadGestures();
 
             LoadModel();
+
+            pricePanel.SetActive(false);
         }
 
         private void LoadGestures()
@@ -83,7 +92,8 @@ namespace Minigame_Drawing_Recognier
                 {
                     if (recognized)
                     {
-                        recognized = false;
+                        ResetLinesRenderer();
+                        /*recognized = false;
                         strokeId = -1;
 
                         points.Clear();
@@ -94,7 +104,7 @@ namespace Minigame_Drawing_Recognier
                             Destroy(lineRenderer.gameObject);
                         }
 
-                        gestureLinesRenderer.Clear();
+                        gestureLinesRenderer.Clear();*/
                     }
 
                     ++strokeId;
@@ -115,6 +125,22 @@ namespace Minigame_Drawing_Recognier
                     currentGestureLineRenderer.SetPosition(vertexCount - 1, Camera.main.ScreenToWorldPoint(new Vector3(virtualKeyPosition.x, virtualKeyPosition.y, 10)));
                 }
             }
+        }
+
+        private void ResetLinesRenderer()
+        {
+            recognized = false;
+            strokeId = -1;
+
+            points.Clear();
+
+            foreach (LineRenderer lineRenderer in gestureLinesRenderer)
+            {
+                lineRenderer.positionCount = 0;
+                Destroy(lineRenderer.gameObject);
+            }
+
+            gestureLinesRenderer.Clear();
         }
 
         private void CreateShapeModelFile(List<Point> pointsList)
@@ -151,7 +177,49 @@ namespace Minigame_Drawing_Recognier
             }
 
             result.text = message;
+
+            HandlePrice(gestureResult.Score);
         }
+
+        #region Price & Next
+
+        private void HandlePrice(float score)
+        {
+            pricePanel.SetActive(true);
+
+            float percentage = float.Parse((score * 100).ToString("0.00"));
+
+            if (score >= scoreMin)
+            {
+                finalPrice = (basePrice + bonus) + (basePrice / 4 * (1 + (percentage/100)));
+                Debug.Log($"Base:{basePrice} - Bonus:{bonus} - +    {basePrice / 4 * (1 + (percentage / 100))}");
+            }
+            else
+            {
+                finalPrice = basePrice + (basePrice / 4 * (1 + (percentage / 100)));
+                Debug.Log($"Base:{basePrice} - +{basePrice / 4 * (1 + (percentage / 100))}");
+            }
+
+            priceText.text = $"Price to pay? {finalPrice}";
+        }
+
+        public void Retry()
+        {
+            ResetLinesRenderer();
+
+            pricePanel.SetActive(false);
+
+            Debug.Log($"Try to get a better bonus !");
+        }
+
+        public void Continue()
+        {
+            pricePanel.SetActive(false);
+
+            Debug.Log($"You have paid {finalPrice} for this product !");
+        }
+
+        #endregion
 
         public void AddModel()
         {
