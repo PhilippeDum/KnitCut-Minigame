@@ -11,9 +11,7 @@ namespace Minigame_Drawing_Recognier
     {
         [Header("Draw Parameters")]
         [SerializeField] private Transform gestureOnScreenPrefab;
-        [SerializeField] private int vertexLimit = 500;
         [SerializeField] private float scoreMin = 0.7f;
-        [SerializeField] private LineRenderer shapeDrawingLineRenderer;
 
         private List<Gesture> trainingSet = new List<Gesture>();
         private List<Point> points = new List<Point>();
@@ -30,6 +28,10 @@ namespace Minigame_Drawing_Recognier
         [SerializeField] private Transform drawingArea;
         [SerializeField] private InputField result;
         [SerializeField] private InputField newModelName;
+
+        [Header("Model(s)")]
+        [SerializeField] private List<Sprite> modelsSprite;
+        [SerializeField] private Image modelSurface;
 
         private string message;
         private string newGestureName = "";
@@ -105,7 +107,7 @@ namespace Minigame_Drawing_Recognier
                 }
 
                 // Stop drawing
-                if (Input.GetMouseButton(0) &&/* vertexCount < vertexLimit &&*/ currentGestureLineRenderer != null)
+                if (Input.GetMouseButton(0) && currentGestureLineRenderer != null)
                 {
                     points.Add(new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId));
 
@@ -130,7 +132,7 @@ namespace Minigame_Drawing_Recognier
             newGestureName = "";
         }
 
-        #region Handle Buttons
+        #region Handle Options
 
         public void Recognize()
         {
@@ -162,15 +164,13 @@ namespace Minigame_Drawing_Recognier
 
         private void LoadModel()
         {
-            shapeDrawingLineRenderer.positionCount = trainingSet[0].Points.Length;
-
-            for (int i = 0; i < trainingSet[0].Points.Length; i++)
+            for (int i = 0; i < modelsSprite.Count; i++)
             {
-                Vector3 pointPosition = new Vector3(trainingSet[0].Points[i].X, trainingSet[0].Points[i].Y, 0);
-                shapeDrawingLineRenderer.SetPosition(i, pointPosition);
+                if (modelsSprite[i].name == trainingSet[0].Name)
+                {
+                    modelSurface.sprite =modelsSprite[i];
+                }
             }
-
-            Debug.Log($"Model {trainingSet[0].Name} loaded !");
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -56,8 +57,6 @@
     <Compile Include="Assets\ProgressionLevelWaterGame.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\Geometry.cs" />
     <Compile Include="Assets\PathSynchronisation.cs" />
-    <Compile Include="Assets\Scripts\ThomasScriptTest\ManualBaking.cs" />
-    <Compile Include="Assets\Scripts\ThomasScriptTest\BlockPiece.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\PointCloudRecognizer.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\Demo.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\Result.cs" />
@@ -67,6 +66,8 @@
     <Compile Include="Assets\Scripts\MovePiece.cs" />
     <Compile Include="Assets\Assets\PDollar\Scripts\PDollarGestureRecognizer\Gesture.cs" />
     <Compile Include="Assets\Scripts\Recognizer\DrawOverUI.cs" />
+    <Compile Include="Assets\Scripts\ThomasScriptTest\ManualBaking.cs" />
+    <Compile Include="Assets\Scripts\ThomasScriptTest\BlockPiece.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\PDollar\Resources\GestureSet\10-stylus-MEDIUM\10-stylus-medium-exclamation_point-01.xml" />
