@@ -5,15 +5,18 @@ using UnityEngine.AI;
 
 public class SynchroPath : MonoBehaviour
 {
-    public NavMeshSurface NMS;
+    public NavMeshSurface[] NMS;
     MovePiece MP;
     // Start is called before the first frame update
     void Start()
     {
         MP = FindObjectOfType<MovePiece>();
-        NMS = gameObject.GetComponent<NavMeshSurface>();
+
         // Build navmesh path
-        NMS.BuildNavMesh();
+        for (int i = 0; i < NMS.Length; i++)
+        {
+            NMS[i].BuildNavMesh();
+        }
     }
 
     // Update is called once per frame
@@ -26,7 +29,10 @@ public class SynchroPath : MonoBehaviour
         if(MP.switchOn == true)
         {
             // Rebuild the navmesh path every time a switch happen
-            NMS.BuildNavMesh();
+            for (int i = 0; i < NMS.Length; i++)
+            {
+                NMS[i].BuildNavMesh();
+            }
             MP.switchOn = false;
         }
     }
