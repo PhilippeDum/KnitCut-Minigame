@@ -89,8 +89,6 @@ namespace PDollarGestureRecognizer
                             points.Add(new Point(
                                 pointX,
                                 pointY,
-                                /*float.Parse(xmlReader["X"]),
-                                float.Parse(xmlReader["Y"]),*/
                                 currentStrokeIndex
                             ));
                             break;

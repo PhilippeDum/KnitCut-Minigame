@@ -11,7 +11,8 @@ namespace Minigame_Drawing_Recognier
     {
         [Header("Draw Parameters")]
         [SerializeField] private Transform gestureOnScreenPrefab;
-        [SerializeField] private float scoreMin = 0.9f;
+        [SerializeField] private Transform drawsParent;
+        [SerializeField] private float scoreMin = 0.8f;
 
         private List<Gesture> trainingSet = new List<Gesture>();
         private List<Point> points = new List<Point>();
@@ -98,8 +99,9 @@ namespace Minigame_Drawing_Recognier
                     }
 
                     ++strokeId;
-                    Transform tmpGesture = Instantiate(gestureOnScreenPrefab, transform.position, transform.rotation) as Transform;
-                    currentGestureLineRenderer = tmpGesture.GetComponent<LineRenderer>();
+                    Transform temporaryGesture = Instantiate(gestureOnScreenPrefab, transform.position, transform.rotation);
+                    temporaryGesture.SetParent(drawsParent);
+                    currentGestureLineRenderer = temporaryGesture.GetComponent<LineRenderer>();
 
                     gestureLinesRenderer.Add(currentGestureLineRenderer);
 
@@ -109,6 +111,15 @@ namespace Minigame_Drawing_Recognier
                 // Stop drawing
                 if (Input.GetMouseButton(0) && currentGestureLineRenderer != null)
                 {
+                    /*Point point = new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId);
+
+                    if (!points.Contains(point))
+                    {
+                        points.Add(point);
+
+                        currentGestureLineRenderer.positionCount = ++vertexCount;
+                        currentGestureLineRenderer.SetPosition(vertexCount - 1, Camera.main.ScreenToWorldPoint(new Vector3(virtualKeyPosition.x, virtualKeyPosition.y, 10)));
+                    }*/
                     points.Add(new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId));
 
                     currentGestureLineRenderer.positionCount = ++vertexCount;
@@ -188,12 +199,12 @@ namespace Minigame_Drawing_Recognier
             if (score >= scoreMin)
             {
                 finalPrice = (basePrice + bonus) + (basePrice / 4 * (1 + (percentage/100)));
-                Debug.Log($"Base:{basePrice} + Bonus:{bonus}  + {basePrice / 4 * (1 + (percentage / 100))}");
+                //Debug.Log($"Base:{basePrice} + Bonus:{bonus}  + {basePrice / 4 * (1 + (percentage / 100))}");
             }
             else
             {
                 finalPrice = basePrice + (basePrice / 4 * (1 + (percentage / 100)));
-                Debug.Log($"Base:{basePrice} + {basePrice / 4 * (1 + (percentage / 100))}");
+                //Debug.Log($"Base:{basePrice} + {basePrice / 4 * (1 + (percentage / 100))}");
             }
 
             priceText.text = $"Price to pay? {finalPrice}";
