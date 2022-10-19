@@ -35,6 +35,8 @@ namespace Minigame_Drawing_Recognier
         [SerializeField] private Transform drawingArea;
         [SerializeField] private InputField result;
         [SerializeField] private InputField newModelName;
+        [SerializeField] private Color correctColor;
+        [SerializeField] private Color wrongColor;
 
         [Header("Model(s)")]
         [SerializeField] private List<Sprite> modelsSprite;
@@ -93,18 +95,6 @@ namespace Minigame_Drawing_Recognier
                     if (recognized)
                     {
                         ResetLinesRenderer();
-                        /*recognized = false;
-                        strokeId = -1;
-
-                        points.Clear();
-
-                        foreach (LineRenderer lineRenderer in gestureLinesRenderer)
-                        {
-                            lineRenderer.positionCount = 0;
-                            Destroy(lineRenderer.gameObject);
-                        }
-
-                        gestureLinesRenderer.Clear();*/
                     }
 
                     ++strokeId;
@@ -162,17 +152,23 @@ namespace Minigame_Drawing_Recognier
 
         public void Recognize()
         {
+            if (points.Count == 0) return;
+
             recognized = true;
 
             Gesture candidate = new Gesture(points.ToArray());
             Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
 
+            Debug.Log($"Current score : {gestureResult.Score}");
+
             if (gestureResult.Score >= scoreMin)
             {
+                result.textComponent.color = correctColor;
                 message = $"{gestureResult.GestureClass} : {(gestureResult.Score * 100).ToString("0.00")}%";
             }
             else
             {
+                result.textComponent.color = wrongColor;
                 message = "Retry !";
             }
 
@@ -192,12 +188,12 @@ namespace Minigame_Drawing_Recognier
             if (score >= scoreMin)
             {
                 finalPrice = (basePrice + bonus) + (basePrice / 4 * (1 + (percentage/100)));
-                Debug.Log($"Base:{basePrice} - Bonus:{bonus} - +    {basePrice / 4 * (1 + (percentage / 100))}");
+                Debug.Log($"Base:{basePrice} + Bonus:{bonus}  + {basePrice / 4 * (1 + (percentage / 100))}");
             }
             else
             {
                 finalPrice = basePrice + (basePrice / 4 * (1 + (percentage / 100)));
-                Debug.Log($"Base:{basePrice} - +{basePrice / 4 * (1 + (percentage / 100))}");
+                Debug.Log($"Base:{basePrice} + {basePrice / 4 * (1 + (percentage / 100))}");
             }
 
             priceText.text = $"Price to pay? {finalPrice}";
@@ -237,8 +233,14 @@ namespace Minigame_Drawing_Recognier
                 if (modelsSprite[i].name == trainingSet[0].Name)
                 {
                     modelSurface.sprite =modelsSprite[i];
+                    modelSurface.preserveAspect = true;
                 }
             }
+        }
+
+        public void Clear()
+        {
+            ResetLinesRenderer();
         }
 
         #endregion
