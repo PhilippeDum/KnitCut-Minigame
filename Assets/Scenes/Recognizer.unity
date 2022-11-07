@@ -486,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &315243597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,7 +844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &541785694
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1380,6 +1380,7 @@ MonoBehaviour:
   gestureOnScreenPrefab: {fileID: 400000, guid: 92139269b369eee48872abc4be5ffdfc, type: 3}
   drawsParent: {fileID: 1014325569}
   scoreMin: 0.85
+  totalVertexLimit: 10000
   basePrice: 20
   bonus: 5
   finalPrice: 0

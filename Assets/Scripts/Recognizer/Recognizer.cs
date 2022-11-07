@@ -13,6 +13,7 @@ namespace Minigame_Drawing_Recognier
         [SerializeField] private Transform gestureOnScreenPrefab;
         [SerializeField] private Transform drawsParent;
         [SerializeField] private float scoreMin = 0.8f;
+        [SerializeField] private int totalVertexLimit = 10000;
 
         private List<Gesture> trainingSet = new List<Gesture>();
         private List<Point> points = new List<Point>();
@@ -76,7 +77,14 @@ namespace Minigame_Drawing_Recognier
 
         void Update()
         {
-            DrawUI();
+            if (CountTotalPoint() <= totalVertexLimit)
+            {
+                DrawUI();
+            }
+            else
+            {
+                Debug.Log($"Not enough sewing thread");
+            }
         }
 
         private void DrawUI()
@@ -157,6 +165,18 @@ namespace Minigame_Drawing_Recognier
             Debug.Log($"New model created : {newGestureName}");
 
             newGestureName = "";
+        }
+
+        private int CountTotalPoint()
+        {
+            int totalCount = 0;
+
+            foreach (LineRenderer gestureLineRenderer in gestureLinesRenderer)
+            {
+                totalCount += gestureLineRenderer.positionCount;
+            }
+
+            return totalCount;
         }
 
         #region Handle Options
