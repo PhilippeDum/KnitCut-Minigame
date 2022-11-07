@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6728043279506533364}
   - component: {fileID: 7436728246161091967}
   - component: {fileID: 8753173704160538039}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: animation_aiguille_droite_bas_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 3171151894455146375}
   - component: {fileID: 7637922199650926995}
   - component: {fileID: 6130411752685233919}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 7109368026937333864}
   - component: {fileID: 998554209296277791}
   - component: {fileID: 244225144604192305}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6317419586314595945}
   - component: {fileID: 3401843827655526370}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: animation_bobineI_gauche_droite 1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

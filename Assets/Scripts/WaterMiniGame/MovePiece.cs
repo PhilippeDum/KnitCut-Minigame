@@ -60,7 +60,7 @@ public class MovePiece : MonoBehaviour
 
         // If there is no default material color, save one
         if (defaultColorMat == Color.white)
-            defaultColorMat = piece.GetChild(piece.childCount - 1).GetComponent<Renderer>().material.color;
+            defaultColorMat = piece.Find("Outline").GetComponent<Renderer>().material.color;
 
         // Modify piece to show the selection
         ModifyPiece(piece, Color.green, new Vector3(0.9f, 0.9f, 0.9f));
@@ -69,7 +69,7 @@ public class MovePiece : MonoBehaviour
     private void ModifyPiece(Transform piece, Color color, Vector3 scale)
     {
         // Change color of the outline object
-        piece.GetChild(piece.childCount - 1).GetComponent<Renderer>().material.color = color;
+        piece.Find("Outline").GetComponent<Renderer>().material.color = color;
         // Change scale to get a better view
         piece.localScale = scale;
     }
