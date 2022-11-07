@@ -11,7 +11,8 @@ namespace Minigame_Drawing_Recognier
     {
         [Header("Draw Parameters")]
         [SerializeField] private Transform gestureOnScreenPrefab;
-        [SerializeField] private float scoreMin = 0.9f;
+        [SerializeField] private Transform drawsParent;
+        [SerializeField] private float scoreMin = 0.8f;
 
         private List<Gesture> trainingSet = new List<Gesture>();
         private List<Point> points = new List<Point>();
@@ -35,6 +36,8 @@ namespace Minigame_Drawing_Recognier
         [SerializeField] private Transform drawingArea;
         [SerializeField] private InputField result;
         [SerializeField] private InputField newModelName;
+        [SerializeField] private Color correctColor;
+        [SerializeField] private Color wrongColor;
 
         [Header("Model(s)")]
         [SerializeField] private List<Sprite> modelsSprite;
@@ -93,23 +96,12 @@ namespace Minigame_Drawing_Recognier
                     if (recognized)
                     {
                         ResetLinesRenderer();
-                        /*recognized = false;
-                        strokeId = -1;
-
-                        points.Clear();
-
-                        foreach (LineRenderer lineRenderer in gestureLinesRenderer)
-                        {
-                            lineRenderer.positionCount = 0;
-                            Destroy(lineRenderer.gameObject);
-                        }
-
-                        gestureLinesRenderer.Clear();*/
                     }
 
                     ++strokeId;
-                    Transform tmpGesture = Instantiate(gestureOnScreenPrefab, transform.position, transform.rotation) as Transform;
-                    currentGestureLineRenderer = tmpGesture.GetComponent<LineRenderer>();
+                    Transform temporaryGesture = Instantiate(gestureOnScreenPrefab, transform.position, transform.rotation);
+                    temporaryGesture.SetParent(drawsParent);
+                    currentGestureLineRenderer = temporaryGesture.GetComponent<LineRenderer>();
 
                     gestureLinesRenderer.Add(currentGestureLineRenderer);
 
@@ -119,6 +111,15 @@ namespace Minigame_Drawing_Recognier
                 // Stop drawing
                 if (Input.GetMouseButton(0) && currentGestureLineRenderer != null)
                 {
+                    /*Point point = new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId);
+
+                    if (!points.Contains(point))
+                    {
+                        points.Add(point);
+
+                        currentGestureLineRenderer.positionCount = ++vertexCount;
+                        currentGestureLineRenderer.SetPosition(vertexCount - 1, Camera.main.ScreenToWorldPoint(new Vector3(virtualKeyPosition.x, virtualKeyPosition.y, 10)));
+                    }*/
                     points.Add(new Point(virtualKeyPosition.x, -virtualKeyPosition.y, strokeId));
 
                     currentGestureLineRenderer.positionCount = ++vertexCount;
@@ -162,17 +163,23 @@ namespace Minigame_Drawing_Recognier
 
         public void Recognize()
         {
+            if (points.Count == 0) return;
+
             recognized = true;
 
             Gesture candidate = new Gesture(points.ToArray());
             Result gestureResult = PointCloudRecognizer.Classify(candidate, trainingSet.ToArray());
 
+            Debug.Log($"Current score : {gestureResult.Score}");
+
             if (gestureResult.Score >= scoreMin)
             {
+                result.textComponent.color = correctColor;
                 message = $"{gestureResult.GestureClass} : {(gestureResult.Score * 100).ToString("0.00")}%";
             }
             else
             {
+                result.textComponent.color = wrongColor;
                 message = "Retry !";
             }
 
@@ -192,12 +199,12 @@ namespace Minigame_Drawing_Recognier
             if (score >= scoreMin)
             {
                 finalPrice = (basePrice + bonus) + (basePrice / 4 * (1 + (percentage/100)));
-                Debug.Log($"Base:{basePrice} - Bonus:{bonus} - +    {basePrice / 4 * (1 + (percentage / 100))}");
+                //Debug.Log($"Base:{basePrice} + Bonus:{bonus}  + {basePrice / 4 * (1 + (percentage / 100))}");
             }
             else
             {
                 finalPrice = basePrice + (basePrice / 4 * (1 + (percentage / 100)));
-                Debug.Log($"Base:{basePrice} - +{basePrice / 4 * (1 + (percentage / 100))}");
+                //Debug.Log($"Base:{basePrice} + {basePrice / 4 * (1 + (percentage / 100))}");
             }
 
             priceText.text = $"Price to pay? {finalPrice}";
@@ -237,8 +244,14 @@ namespace Minigame_Drawing_Recognier
                 if (modelsSprite[i].name == trainingSet[0].Name)
                 {
                     modelSurface.sprite =modelsSprite[i];
+                    modelSurface.preserveAspect = true;
                 }
             }
+        }
+
+        public void Clear()
+        {
+            ResetLinesRenderer();
         }
 
         #endregion
