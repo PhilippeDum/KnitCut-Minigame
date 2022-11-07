@@ -9,7 +9,7 @@ public class ProgressionLevelWaterGame : MonoBehaviour
     public GameObject EndOfGameW;
     private float tempsBeforeMoving = 0f;
     private bool startMoving = false;
-    private float tempsSecurité = 0f;
+    private float tempsSecurity = 0f;
     private float tempsBeforeFailed = 2f;
     private VictoryWaterGame victoryWaterGame;
     private bool Failed = false;
@@ -44,10 +44,10 @@ public class ProgressionLevelWaterGame : MonoBehaviour
         
         if (startMoving == true)
         {
-            tempsSecurité = tempsSecurité + Time.deltaTime;
-            if(tempsSecurité >= 3f)
+            tempsSecurity = tempsSecurity + Time.deltaTime;
+            if(tempsSecurity >= 3f)
             {
-                tempsSecurité = 3f;
+                tempsSecurity = 3f;
                 if (NMA.velocity.x == 0f && NMA.velocity.z == 0f)
                 {
                     Debug.Log("Failed");
