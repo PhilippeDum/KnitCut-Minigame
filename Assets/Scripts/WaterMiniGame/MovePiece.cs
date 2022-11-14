@@ -4,17 +4,25 @@ public class MovePiece : MonoBehaviour
 {
     // verification if the switch happen
     public bool switchOn = false;
+    private ProgressionLevelWaterGame PLW;
 
     [Header("Pieces")]
     [SerializeField] private Transform firstPieceToReplace;
     [SerializeField] private Transform secondPieceToReplace;
 
     Color defaultColorMat = Color.white;
+    private void Start()
+    {
+        PLW = FindObjectOfType<ProgressionLevelWaterGame>();
+    }
 
     void Update()
     {
-
-        DetectClick();
+        if(PLW.StopMoving == false)
+        {
+            DetectClick();
+        }
+       
     }
 
     private void DetectClick()

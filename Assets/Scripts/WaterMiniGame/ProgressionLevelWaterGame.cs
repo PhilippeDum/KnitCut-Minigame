@@ -9,10 +9,13 @@ public class ProgressionLevelWaterGame : MonoBehaviour
     public GameObject EndOfGameW;
     private float tempsBeforeMoving = 0f;
     private bool startMoving = false;
+    private bool Moving = false;
     private float tempsSecurity = 0f;
-    private float tempsBeforeFailed = 2f;
     private VictoryWaterGame victoryWaterGame;
     private bool Failed = false;
+    public bool StopMoving = false;
+    [SerializeField] private GameObject Lost;
+    [SerializeField] private GameObject[] Pieces;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +23,7 @@ public class ProgressionLevelWaterGame : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         StopMiniGameWater();
@@ -29,13 +32,17 @@ public class ProgressionLevelWaterGame : MonoBehaviour
     void MovingWaterStart()
     {
         NMA.isStopped = false;
-        tempsBeforeMoving = tempsBeforeMoving + Time.deltaTime;
-        if (tempsBeforeMoving >= 5f)
+        //tempsBeforeMoving = tempsBeforeMoving + Time.deltaTime;
+        if (Moving == true)
         {
             NMA.SetDestination(EndOfGameW.transform.position);
-            tempsBeforeMoving = 5f;
-            startMoving = true; 
-            
+            //tempsBeforeMoving = 5f;
+            startMoving = true;
+            StopMoving = true;
+            for (int i = 0; i < Pieces.Length; i++)
+            {
+                Pieces[i].layer = LayerMask.NameToLayer("Ignore Raycast");
+            }
         }
 
     }
@@ -44,13 +51,15 @@ public class ProgressionLevelWaterGame : MonoBehaviour
         
         if (startMoving == true)
         {
+            
             tempsSecurity = tempsSecurity + Time.deltaTime;
             if(tempsSecurity >= 3f)
             {
                 tempsSecurity = 3f;
-                if (NMA.velocity.x == 0f && NMA.velocity.z == 0f)
+                if (NMA.velocity.x <= 0.1f && NMA.velocity.z <= 0.1f && NMA.velocity.x >= -0.1f && NMA.velocity.z >= -0.1f)
                 {
                     Debug.Log("Failed");
+                    Lost.SetActive(true);
                     Failed = true;
                 }
                 
@@ -70,6 +79,10 @@ public class ProgressionLevelWaterGame : MonoBehaviour
             MovingWaterStart();
             StopMovingVerification();
         }
+    }
+    public void MovingWater()
+    {
+        Moving = true;
     }
 
     

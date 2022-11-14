@@ -55,11 +55,13 @@ public class Shop_Fruit : MonoBehaviour
         if (other.tag == "Player" && Input.GetKey(KeyCode.E) && talking == false && SafeTimer == 0)
         {
             ShopFruitUI.SetActive(true);
+            InteractionUI.SetActive(false);
             talking = true;
         }
         if(other.tag == "Player" && Input.GetKey(KeyCode.E) && talking == true && SafeTimer == 1.5)
         {
             ShopFruitUI.SetActive(false);
+            InteractionUI.SetActive(true);
             talking = false;
         }
     }

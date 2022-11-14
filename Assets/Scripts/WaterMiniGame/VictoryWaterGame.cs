@@ -5,6 +5,7 @@ using UnityEngine;
 public class VictoryWaterGame : MonoBehaviour
 {
     public bool win = false;
+    [SerializeField] private GameObject WinGame;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class VictoryWaterGame : MonoBehaviour
         {
             win = true;
             Debug.Log("You Win");
+            WinGame.SetActive(true);
         }
     }
 }
