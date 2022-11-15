@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0a5fb521a10508d40b0a215bf6d657d6
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: ae4920e257efabb4d9725a7d7c834319, type: 2}
+  _fileAsset: {instanceID: 0}
+  _assetPath: Assets/Materials/Substance_archive/Wool_image/Wool_Image.sbsar
