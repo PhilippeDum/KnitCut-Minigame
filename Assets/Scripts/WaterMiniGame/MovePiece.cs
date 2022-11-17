@@ -34,23 +34,24 @@ public class MovePiece : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                IdentifyPiece(hit.transform);
+                IdentifyObject(hit.transform);
             }
         }
     }
 
-    private void IdentifyPiece(Transform piece)
+    private void IdentifyObject(Transform hitObject)
     {
-        
-        // If no piece already selected, this piece is first
+        if (!hitObject.GetComponent<BlockPiece>()) return;
+
+        // If no hitObject already selected, this hitObject is first
         if (firstPieceToReplace == null)
         {
-            SelectPiece(piece, true);
+            SelectPiece(hitObject, true);
         }
-        // If there is already one piece selected, this piece is second
+        // If there is already one hitObject selected, this hitObject is second
         else if(secondPieceToReplace == null)
         {
-            SelectPiece(piece, false);
+            SelectPiece(hitObject, false);
 
             // Two pieces are selected -> Switch positions
             SwitchPieces();
@@ -59,10 +60,10 @@ public class MovePiece : MonoBehaviour
 
     private void SelectPiece(Transform piece, bool isFirstPiece)
     {
-        // If no piece already selected, this piece is first
+        // If no hitObject already selected, this hitObject is first
         if (isFirstPiece)
             firstPieceToReplace = piece;
-        // If there is already one piece selected, this piece is second
+        // If there is already one hitObject selected, this hitObject is second
         else
             secondPieceToReplace = piece;
 
@@ -70,13 +71,13 @@ public class MovePiece : MonoBehaviour
         if (defaultColorMat == Color.white)
             defaultColorMat = piece.Find("Outline").GetComponent<Renderer>().material.color;
 
-        // Modify piece to show the selection
+        // Modify hitObject to show the selection
         ModifyPiece(piece, Color.green, new Vector3(0.9f, 0.9f, 0.9f));
     }
 
     private void ModifyPiece(Transform piece, Color color, Vector3 scale)
     {
-        // Change color of the outline object
+        // Change color of the outline hitObject
         piece.Find("Outline").GetComponent<Renderer>().material.color = color;
         // Change scale to get a better view
         piece.localScale = scale;
