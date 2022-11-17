@@ -14,15 +14,15 @@ namespace Recognition
         [SerializeField] private GestureClass gesture = new GestureClass();
         [SerializeField] private float score;
         [SerializeField] private float correctRate;
+        [SerializeField] private int minPoints = 10;
 
         private RaycastHit hit;
-        private GameObject target;
 
         public GestureClass Gesture => gesture;
 
         [Header("Line Properties")]
         [SerializeField] private LineRenderer lineRenderer;
-        [Range(0.01f, 0.1f)][SerializeField] private float lineWidth = 0.2f;
+        [Range(0.001f, 0.1f)][SerializeField] private float lineWidth = 0.2f;
         [Tooltip("The distance that the lineRenderer is being create from the camera")]
         [SerializeField] private float zline = 0.5f;
         [Tooltip("Material used in the lineRenderer")]
@@ -82,14 +82,21 @@ namespace Recognition
 
         public void CompareGestureToModel()
         {
+            if (gesture.mouseData.Count <= 0) return;
+
             index = 0;
             gesture.SetIsGesturing(b: false);
 
+            /// Probleme conversion en 32x32 (compression) -> CHANGER
             Texture2D texture2D = gesture.MapPattern();
 
             if ((bool)texture2D)
             {
-                score = gesture.TestPattern(texture2D, mouseGesture.TexturePattern);
+                mouseGesture.TextureDrawing = texture2D;
+
+                /// Essayer de vérifier 1 fois + vérifier avec pixels blancs et noirs inversés -> TOLERANCE
+                //score = gesture.TestPattern(texture2D, mouseGesture.TexturePattern);
+                score = gesture.CompareDrawingWithPattern(texture2D, mouseGesture.TexturePattern);
 
                 if (score >= correctRate)
                 {
@@ -132,8 +139,7 @@ namespace Recognition
 
         private void DrawLine()
         {
-
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !gesture.mouseData.Contains(Input.mousePosition))
             {
                 mouseGesture.Score.text = "Score ?";
 

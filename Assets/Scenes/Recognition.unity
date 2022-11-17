@@ -168,9 +168,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceRayCast: 2.5
   score: 0
-  correctRate: 0.7
+  correctRate: 0.75
+  minPoints: 40
   lineRenderer: {fileID: 1482284259}
-  lineWidth: 0.01
+  lineWidth: 0.005
   zline: 0.5
   lineMaterial: {fileID: 2100000, guid: 584df35baa5011547a28e3a39b8ad854, type: 2}
   widthTextLine: 3
@@ -339,7 +340,7 @@ Transform:
   m_GameObject: {fileID: 691779333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2, y: 1, z: 1}
-  m_LocalScale: {x: 1.45, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -356,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73903a33d6103a489f6aa7a7327281d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texturePattern: {fileID: 2800000, guid: dde68400c9d86b04f85c3ba85805bba3, type: 3}
+  texturePattern: {fileID: 2800000, guid: d4de365a595c9e64890a0b2576cae2a5, type: 3}
   imageModel: {fileID: 461013775}
   score: {fileID: 1857848543}
 --- !u!1 &705507993
@@ -685,7 +686,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

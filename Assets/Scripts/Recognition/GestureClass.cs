@@ -11,11 +11,6 @@ public class GestureClass
 
     public Texture2D MapPattern()
     {
-        if (mouseData.Count < 10)
-        {
-            return null;
-        }
-
         Bounds bounds = new Bounds(mouseData[0], Vector3.zero);
         for (int i = 1; i < mouseData.Count; i++)
         {
@@ -76,48 +71,98 @@ public class GestureClass
         return texture2D;
     }
 
-    public float TestPattern(Texture2D fromTexture, Texture2D toTexture)
+    public float TestPattern(Texture2D textureDrawing, Texture2D texturePattern)
     {
-        if (toTexture == null)
+        if (texturePattern == null)
         {
             Debug.LogError("<b>Mouse Gesture Interpretation:</b> texture pattern for comparison is not set.");
             return 0f;
         }
 
-        Color[] pixels = fromTexture.GetPixels();
-        Color[] pixels2 = toTexture.GetPixels();
-        float num = 0f;
-        float num2 = 0f;
-        float num3 = 0f;
-        for (int i = 0; i < pixels2.Length; i++)
+        Color[] pixelsTextureDrawing = textureDrawing.GetPixels();
+        Color[] pixelsTexturePattern = texturePattern.GetPixels();
+        float numBlackPixelsTexturePattern = 0f;
+        float numBlackPixelsTextureDrawing = 0f;
+        float numSamePixelsTextures = 0f;
+        float numExtraPixels = 0f;
+
+        for (int i = 0; i < pixelsTexturePattern.Length; i++)
         {
-            if (pixels2[i] == Color.black)
+            if (pixelsTexturePattern[i] == Color.black)
             {
-                num += 1f;
+                numBlackPixelsTexturePattern ++;
             }
         }
 
-        for (int j = 0; j < pixels.Length; j++)
+        for (int j = 0; j < pixelsTextureDrawing.Length; j++)
         {
-            if (pixels[j] == Color.black)
+            if (pixelsTextureDrawing[j] == Color.black)
             {
-                num2 += 1f;
-                if (pixels2[j] == Color.black)
+                numBlackPixelsTextureDrawing ++;
+
+                if (pixelsTexturePattern[j] == Color.black)
                 {
-                    num3 += 1f;
+                    numSamePixelsTextures ++;
+                }
+
+                if (pixelsTexturePattern[j] == Color.white)
+                {
+                    numExtraPixels++;
                 }
             }
         }
 
-        //float num4 = num2 - num3;
-        float result = num3 / num;
-        //Debug.Log($"num: {num} - num2: {num2} - num3: {num3} - num4: {num4} - result: {result}");
-        /*if (num4 < num3)
+        //Debug.Log($"black pixels pattern : {numBlackPixelsTexturePattern} - black pixels drawing : {numBlackPixelsTextureDrawing} - same {numSamePixelsTextures} - extra {numExtraPixels}");
+
+        //float num4 = numBlackPixelsTextureDrawing - numSamePixelsTextures;
+        float result = numSamePixelsTextures / numBlackPixelsTexturePattern;
+        //Debug.Log($"numBlackPixelsTexturePattern: {numBlackPixelsTexturePattern} - numBlackPixelsTextureDrawing: {numBlackPixelsTextureDrawing} - numSamePixelsTextures: {numSamePixelsTextures} - num4: {num4} - result: {result}");
+        /*if (num4 < numSamePixelsTextures)
         {
             return result;
         }*/
 
         //return 0f;
+        return result;
+    }
+
+    public float CompareDrawingWithPattern(Texture2D textureDrawing, Texture2D texturePattern)
+    {
+        if (texturePattern == null)
+        {
+            Debug.LogError("<b>Mouse Gesture Interpretation:</b> texture pattern for comparison is not set.");
+            return 0f;
+        }
+
+        Color[] pixelsTextureDrawing = textureDrawing.GetPixels();
+        Color[] pixelsTexturePattern = texturePattern.GetPixels();
+        float numBlackPixelsTexturePattern = 0f;
+        float numBlackPixelsTextureDrawing = 0f;
+        float numSamePixelsTextures = 0f;
+        float numExtraPixels = 0f;
+
+        ////////////////////////////////////////////////////////////////////
+        for (int i = 0; i < pixelsTexturePattern.Length; i++)
+        {
+            if (pixelsTexturePattern[i] == Color.black) numBlackPixelsTexturePattern++;
+        }
+
+        for (int i = 0; i < pixelsTextureDrawing.Length; i++)
+        {
+            if (pixelsTextureDrawing[i] == Color.black) numBlackPixelsTextureDrawing++;
+        }
+
+        for (int i = 0; i < pixelsTextureDrawing.Length; i++)
+        {
+            if (pixelsTextureDrawing[i] == Color.black && pixelsTexturePattern[i] == Color.black) numSamePixelsTextures++;
+            if (pixelsTextureDrawing[i] == Color.black && pixelsTexturePattern[i] == Color.white) numExtraPixels++;
+        }
+
+        Debug.Log($"pattern black={numBlackPixelsTexturePattern} - drawing black={numBlackPixelsTextureDrawing}");
+        Debug.Log($"same {numSamePixelsTextures}");
+        ////////////////////////////////////////////////////////////////////
+        
+        float result = numSamePixelsTextures / numBlackPixelsTexturePattern;
         return result;
     }
 
