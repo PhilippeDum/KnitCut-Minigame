@@ -5,11 +5,8 @@ namespace Recognition
 {
     public class MouseGesture : MonoBehaviour
     {
-        MouseInput playerInput;
-
         [SerializeField] private Texture2D texturePattern;
         [SerializeField] private Texture2D textureDrawing;
-        //[SerializeField] private Texture2D textureToDisplay;
         [SerializeField] private RawImage imageModel;
         [SerializeField] private Text score;
 
@@ -23,8 +20,6 @@ namespace Recognition
 
         private void Start()
         {
-            playerInput = FindObjectOfType<MouseInput>();
-
             DisplayPattern();
         }
 
