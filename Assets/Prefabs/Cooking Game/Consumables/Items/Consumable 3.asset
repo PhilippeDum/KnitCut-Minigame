@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Consumable 3
   m_EditorClassIdentifier: 
   consumableName: Consumable 3
+  baseQuantity: 20
   quantity: 20
   consumableObject: {fileID: 2250793326028839752, guid: 014cecfae72040841bf0fa37d523dab0, type: 3}

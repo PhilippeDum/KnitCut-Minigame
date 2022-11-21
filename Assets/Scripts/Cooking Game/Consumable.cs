@@ -4,6 +4,12 @@ using UnityEngine;
 public class Consumable : ScriptableObject
 {
     public string consumableName;
+    public int baseQuantity = 20;
     public int quantity;
     public GameObject consumableObject;
+
+    public void InitializeQuantity()
+    {
+        quantity = baseQuantity;
+    }
 }

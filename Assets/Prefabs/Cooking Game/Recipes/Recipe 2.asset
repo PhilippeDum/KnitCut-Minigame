@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1f1d8b5f5fe3dbc46bf40957f4467adf, type: 2}
   - {fileID: 11400000, guid: 84b2f23d25af7b84f99e2095155d1303, type: 2}
   - {fileID: 11400000, guid: 16ffcc1a8000d464bab5c9c94983f818, type: 2}
-  finalProduct: {fileID: 0}
+  finalProduct: {fileID: 412880846473995412, guid: 41940bedfae61a6419ad104445aef1c3, type: 3}
   canBeCooked: 0
