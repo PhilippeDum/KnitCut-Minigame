@@ -98,9 +98,7 @@ namespace Recognition
 
             if ((bool)texture2D)
             {
-                mouseGesture.TextureDrawing = texture2D;
-
-                float[] results = gesture.CompareDrawingWithPattern(texture2D, mouseGesture.TexturePattern);
+                float[] results = gesture.CompareDrawingWithPattern(texture2D, mouseGesture.CurrentPattern);
                 float score = results[0];
                 float percentageExtra = results[1];
 

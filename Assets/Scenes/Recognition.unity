@@ -365,8 +365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73903a33d6103a489f6aa7a7327281d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texturePattern: {fileID: 2800000, guid: 636d806706331ce45a5e239c63ce2fc8, type: 3}
-  textureDrawing: {fileID: 0}
+  texturesPatterns:
+  - {fileID: 2800000, guid: 636d806706331ce45a5e239c63ce2fc8, type: 3}
+  - {fileID: 2800000, guid: f0c725f69c09d5f42a36331241f249e8, type: 3}
+  texturesToDisplay:
+  - {fileID: 2800000, guid: 0e9705acdd453494d95c68ed26a7dadd, type: 3}
+  - {fileID: 2800000, guid: b5ad91c28c6aa1147952145be61b894d, type: 3}
   imageModel: {fileID: 461013775}
   score: {fileID: 1857848543}
 --- !u!4 &167517863
