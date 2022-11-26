@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eed5864476f84ce4b85454db09ca4eaa, type: 3}
-  m_Name: default
+  m_Name: background_recognition
   m_EditorClassIdentifier: 
-  AssetPath: Assets/Materials/Osier/Osier.sbsar
-  OutputPath: Assets\Materials\Osier\Osier_default
+  AssetPath: Assets/Materials/Substance_archive/Osier/Osier.sbsar
+  OutputPath: Assets\Materials\Substance_archive\Osier\Osier_background_recognition
   RawData: {fileID: -244192453324840774, guid: f45931dd1bb14474db80aba2afdd3c7f, type: 3}
-  Name: default
-  IsRoot: 1
+  Name: background_recognition
+  IsRoot: 0
   FlagedForDelete: 0
-  GUID: eea2ea9c-e3ec-4f0a-a97c-c5dbf310e9a6
+  GUID: a453e814-6bd5-4bef-a09f-45085715a5c7
   Index: 0
   Input:
   - id: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   IsRuntimeOnly: 1
   GenerateAllOutputs: 0
   GenerateAllMipmaps: 1
-  OutputMaterial: {fileID: 2100000, guid: 8e6ee2e90cebe2645b9064d9c84ba491, type: 2}
+  OutputMaterial: {fileID: 2100000, guid: eecde49ae3b238a45b332c6c00c0e22f, type: 2}
   DefaultPreset: " <sbspreset pkgurl=\"pkg://Osier\" label=\"\" >\n  <presetinput
     identifier=\"$outputsize\" uid=\"668682144\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
   MaterialShader: Standard
