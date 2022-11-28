@@ -62,14 +62,13 @@ public class Cooking : MonoBehaviour
             // For each consumable required for the recipe
             for (int i = 0; i < recipe.consumablesRequired.Count; i++)
             {
-                ConsumableRequired consumableRequiredOfRecipe = recipe.consumablesRequired[i];
                 // If player do not possessed the required consumable, can not cook recipe
-                if (!consumablesPossessed.Contains(consumableRequiredOfRecipe.consumable))
+                if (!consumablesPossessed.Contains(recipe.consumablesRequired[i].consumable))
                 {
                     recipeCanBeCooked = false;
                 }
 
-                if (consumablesPossessed.Contains(consumableRequiredOfRecipe.consumable) && consumablesPossessed[i].quantity < consumableRequiredOfRecipe.quantity)
+                if (consumablesPossessed.Contains(recipe.consumablesRequired[i].consumable) && consumablesPossessed[i].quantity < recipe.consumablesRequired[i].quantity)
                 {
                     recipeCanBeCooked = false;
                 }

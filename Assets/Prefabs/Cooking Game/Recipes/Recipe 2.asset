@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeName: Recipe 2
   consumablesRequired:
-  - {fileID: 11400000, guid: 1f1d8b5f5fe3dbc46bf40957f4467adf, type: 2}
-  - {fileID: 11400000, guid: 84b2f23d25af7b84f99e2095155d1303, type: 2}
-  - {fileID: 11400000, guid: 16ffcc1a8000d464bab5c9c94983f818, type: 2}
+  - consumable: {fileID: 11400000, guid: 3aa6bd84dc18ca545aed8fc04094c8ae, type: 2}
+    quantity: 2
+  - consumable: {fileID: 11400000, guid: 3de1b7089c237594d90b176dab0eedb2, type: 2}
+    quantity: 5
+  - consumable: {fileID: 11400000, guid: f9c2127cdb774204b9f9004b7c5e3582, type: 2}
+    quantity: 3
   finalProduct: {fileID: 412880846473995412, guid: 41940bedfae61a6419ad104445aef1c3, type: 3}
   canBeCooked: 0
