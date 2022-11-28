@@ -82,10 +82,8 @@ public class Flowers : MonoBehaviour
 
         for (int i = 0; i < flowers.Length; i++)
         {
-            if (!flowers[i].isGoodFlower)
-            {
-                flowers[i].flower.GetComponent<Button>().interactable = false;
-            }
+            Transform flowerTransform = flowers[i].flower.transform;
+            flowerTransform.GetComponent<Button>().interactable = false;
         }
 
         yield return new WaitForSeconds(3f);
