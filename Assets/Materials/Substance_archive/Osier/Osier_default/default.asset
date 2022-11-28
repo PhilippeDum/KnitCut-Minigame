@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eed5864476f84ce4b85454db09ca4eaa, type: 3}
   m_Name: default
   m_EditorClassIdentifier: 
-  AssetPath: Assets/Materials/Osier/Osier.sbsar
-  OutputPath: Assets\Materials\Osier\Osier_default
+  AssetPath: Assets/Materials/Substance_archive/Osier/Osier.sbsar
+  OutputPath: Assets\Materials\Substance_archive\Osier\Osier_default
   RawData: {fileID: -244192453324840774, guid: f45931dd1bb14474db80aba2afdd3c7f, type: 3}
   Name: default
   IsRoot: 1
   FlagedForDelete: 0
-  GUID: eea2ea9c-e3ec-4f0a-a97c-c5dbf310e9a6
+  GUID: af96e9e2-7015-462d-baec-6c2979708564
   Index: 0
   Input:
   - id: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
       Index: 0
       Type: 8
       Channel: baseColor
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: 8ac2c7c47fe672441b5bc5788a9eae74, type: 3}
     sRGB: 1
     IsVirtual: 0
     IsStandardOutput: 1
@@ -59,7 +59,7 @@ MonoBehaviour:
       Index: 1
       Type: 8
       Channel: normal
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: c20a0917e126bee4dabd640cda83e005, type: 3}
     sRGB: 0
     IsVirtual: 0
     IsStandardOutput: 1
@@ -91,7 +91,7 @@ MonoBehaviour:
       Index: 3
       Type: 8
       Channel: metallic
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: 020b59eab230460419a38742dd203f99, type: 3}
     sRGB: 0
     IsVirtual: 0
     IsStandardOutput: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
       Index: 4
       Type: 8
       Channel: height
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: 5e1239264fcb77141bdbeb87e2df2a2f, type: 3}
     sRGB: 1
     IsVirtual: 0
     IsStandardOutput: 1
@@ -123,7 +123,7 @@ MonoBehaviour:
       Index: 5
       Type: 8
       Channel: ambientOcclusion
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: 483f8be7bfa561648a86bc494e81e61c, type: 3}
     sRGB: 0
     IsVirtual: 0
     IsStandardOutput: 1
@@ -137,10 +137,10 @@ MonoBehaviour:
   Thumbnail: 
   HasThumbnail: 0
   CurrentStatePreset: 
-  IsRuntimeOnly: 1
+  IsRuntimeOnly: 0
   GenerateAllOutputs: 0
   GenerateAllMipmaps: 1
-  OutputMaterial: {fileID: 2100000, guid: 8e6ee2e90cebe2645b9064d9c84ba491, type: 2}
+  OutputMaterial: {fileID: 2100000, guid: f6f601c826e1c5b419dd613e9032f93f, type: 2}
   DefaultPreset: " <sbspreset pkgurl=\"pkg://Osier\" label=\"\" >\n  <presetinput
     identifier=\"$outputsize\" uid=\"668682144\" type=\"8\" value=\"10,10\" />\n</sbspreset>\n"
   MaterialShader: Standard

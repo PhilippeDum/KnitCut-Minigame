@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssetPath: Assets/Materials/Substance_archive/Wool_image/Wool_Image.sbsar
   OutputPath: Assets/Materials/Substance_archive/Wool_image/Wool_Image_graph_0
-  RawData: {fileID: 0}
+  RawData: {fileID: -244192453324840774, guid: 0a5fb521a10508d40b0a215bf6d657d6, type: 3}
   Name: graph_0
   IsRoot: 1
   FlagedForDelete: 0
-  GUID: e8f173c9-b7ef-4e70-9cbb-e17a42976f00
+  GUID: ba46060b-26cd-483f-8f60-3b8fbd8a5346
   Index: 0
   Input:
   - id: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
       Index: 0
       Type: 8
       Channel: baseColor
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: 6a635807faeb5b349a5b56dbfe7b0534, type: 3}
     sRGB: 1
     IsVirtual: 0
     IsStandardOutput: 1
@@ -66,7 +66,7 @@ MonoBehaviour:
       Index: 1
       Type: 8
       Channel: normal
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: 5af01a6d05719bb42a13a36739d46a65, type: 3}
     sRGB: 0
     IsVirtual: 0
     IsStandardOutput: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
       Index: 3
       Type: 8
       Channel: metallic
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: 4bdc4a5e620895849bd6da0edf8804f9, type: 3}
     sRGB: 0
     IsVirtual: 0
     IsStandardOutput: 1
@@ -114,7 +114,7 @@ MonoBehaviour:
       Index: 4
       Type: 8
       Channel: height
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: a81bf3e0752d9cf47855358e2bf4a4f4, type: 3}
     sRGB: 1
     IsVirtual: 0
     IsStandardOutput: 1
@@ -130,7 +130,7 @@ MonoBehaviour:
       Index: 5
       Type: 8
       Channel: ambientOcclusion
-    OutputTexture: {fileID: 0}
+    OutputTexture: {fileID: 2800000, guid: f5209109505ca5f46a2a068e72c81b7e, type: 3}
     sRGB: 0
     IsVirtual: 0
     IsStandardOutput: 1
@@ -147,11 +147,11 @@ MonoBehaviour:
   IsRuntimeOnly: 0
   GenerateAllOutputs: 0
   GenerateAllMipmaps: 1
-  OutputMaterial: {fileID: 0}
+  OutputMaterial: {fileID: 2100000, guid: 4472a04b280e68e479b1b7c9fcd736f0, type: 2}
   DefaultPreset: " <sbspreset pkgurl=\"pkg://knitWool\" label=\"\" >\n  <presetinput
     identifier=\"$outputsize\" uid=\"1538910043\" type=\"8\" value=\"10,10\" />\n
     </sbspreset>\n"
-  MaterialShader: 
+  MaterialShader: Standard
   RenderTextures: 0
   OutputRemaped: 0
   references:

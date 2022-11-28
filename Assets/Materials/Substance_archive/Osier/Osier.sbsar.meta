@@ -9,7 +9,7 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
   _instancesCopy:
-  - {fileID: 11400000, guid: 5be480044e3f4de4384192059a8d370b, type: 2}
-  - {fileID: 11400000, guid: 114efc37e5144984cb657d18c469596a, type: 2}
-  _fileAsset: {fileID: 349431513902975818, guid: f45931dd1bb14474db80aba2afdd3c7f, type: 3}
-  _assetPath: Assets/Materials/Osier/Osier.sbsar
+  - {fileID: 11400000, guid: 50ba2b1538649d54983e6f3e7fefaeb0, type: 2}
+  - {fileID: 11400000, guid: 3fb89a3f8bb39094b9a6efc12859bda4, type: 2}
+  _fileAsset: {fileID: 6013892654665635331, guid: f45931dd1bb14474db80aba2afdd3c7f, type: 3}
+  _assetPath: Assets/Materials/Substance_archive/Osier/Osier.sbsar

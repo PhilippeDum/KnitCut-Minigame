@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2b0848847b0cc4748816434a0767ccf7
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: cd9c2239332b4be45853e6c893be6aae, type: 2}
+  _fileAsset: {instanceID: 0}
+  _assetPath: Assets/Materials/Substance_archive/Wool_patch/WOOLPATCH_001.sbsar
